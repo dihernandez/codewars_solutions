@@ -1,0 +1,24 @@
+bool chessBoardCellColor(std::string cell1, std::string cell2) {
+  int cell1_ascii = cell1[0];
+  int cell2_ascii = cell2[0];
+  bool cell1_is_brown, cell2_is_brown;
+  std::cout << cell2 << std::endl;
+  
+  cell1_is_brown = (cell1_ascii % 2 == 1) && (cell1.substr(1:(cell1.length() - 1)) % 2 == 1); 
+  if (cell1_ascii % 2 == 1 && cell1[0] % 2 == 1) {
+    //std::cout << cell1 << cell1_ascii << cell1[0] % 2 << std::endl;
+    //std::cout << "at cell1" << std::endl;
+    //std::cout << "after cell1_is_brown" << std::endl;
+  } else {
+  }
+  //std::cout << ('H' % 2 && 3 % 2)<< std::endl;
+  cell2_is_brown = (cell2_ascii % 2 == 1 ) && (cell2[1:(cell2.length() - 1)] % 2 == 1);
+  std::cout << cell2[0] << cell2[0] % 2 << std::endl;
+  if(cell2_ascii % 2 == 1 && cell2[0] % 2 == 1) {
+    //std::cout << "at cell2" << std::endl;
+    //std::cout << cell2 << cell2_ascii << cell2[0] % 2 << std::endl;
+  } else {
+  }
+  std::cout << cell1 << cell2 << cell1_is_brown << cell2_is_brown << std::endl;
+  return (cell1_is_brown && cell2_is_brown);
+}
