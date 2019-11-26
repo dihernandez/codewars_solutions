@@ -1,0 +1,9 @@
+#include <math.h>
+
+int nbDig(int n, int d) {
+  int all_digits[n];
+  for(int i = 0; i < n; i++) {
+    all_digits[i] = pow(i, 2);
+    printf("all digets %d, n is %d \n", all_digits[i], n); 
+  }
+} 
