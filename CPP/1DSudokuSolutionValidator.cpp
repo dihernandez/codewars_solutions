@@ -104,34 +104,59 @@ bool validateCols(unsigned int board[]) {
   
   vector<vector<unsigned int>>  threes;
 
-  for(int i = 0; i < NUM_SQUARES; i++) { 
+  for(int i = 0; i < NUM_ROWS*3; i++) { 
     vector<unsigned int> subsection = {};
     threes.push_back(subsection);
   }
+
+
+    // for (int s = 0; s < NUM_SQUARES; s++){
+    //     vector<unsigned int> intermediate = threes.at(s);
+
   
-  for(int i = 0; i < NUM_ROWS * NUM_COLS; i += 9){
+    //   for(int i = 0; i < NUM_ROWS * NUM_COLS; i+= 9){
+    //   //for (int j = 0; j < NUM_ROWS; j++) {
+    //     //cout << "j is " << j << endl;
 
+    //    //if(intermediate.size() < 3) {
+    //       unsigned int index_offset = (i%3) * s;
+    //       intermediate.push_back(board[(i%3)*s]);
+    //       intermediate.push_back(board[((i + 1)%3)*s]);
+    //       intermediate.push_back(board[((i + 2)%3)*s]);
+    //       cout << "index is " << (i%3)*s;
+    //    //}
+    //   }
+    //   threes.at(s) = intermediate;
+    //   cout << "s is " << s << endl;
+    //   intermediate.clear();
 
-    for (int j = 0; j < NUM_ROWS; j++) {
-      vector<unsigned int> intermediate = threes.at(j);
+  //   for(int s = 0; s < NUM_ROWS*3; s++) {
+  //     for(int i = 0; i < NUM_ROWS * NUM_COLS; i += 9) {
+  //     vector<unsigned int> subsection = threes.at(s);
+  //     if(subsection.size() < 3) {
+  //       for (int j = 0; j < NUM_ROWS; j++) {
+  //         subsection.push_back(board[j+i]);
+  //       }
+  //     }
 
-      intermediate.push_back(board[j+i]);
-      threes.at(j) = intermediate;
-   }
+  //     threes.at(s) = subsection;
+  //     subsection.clear();
 
- }
+  //   }
+  // }
+  for (int s = 0;  s < NUM_ROWS*3; s++) {
+     vector<unsigned int> intermediate = threes.at(s);
+     intermediate.push_back(board[s*3]);
+     intermediate.push_back(board[s*3 + 1]);
+     intermediate.push_back(board[s*3 + 2]);
+     threes.at(s) = intermediate;
+     intermediate.clear();
+  }
+
  return threes;
 
 }
 
-bool validateSquares(unsigned int board[]) {
-  bool is_valid;
-  vector<vector<unsigned int>> squares = {};
-
-  for(int i = 0; i < NUM_SQUARES; i++) { 
-    vector<unsigned int> subsection = {};
-    squares.push_back(subsection);
-  }
 
   // for(int i = 0; i < NUM_ROWS * NUM_COLS; i++) {
   //     for (int j = 0; j < NUM_SQUARES; j++){
@@ -164,19 +189,8 @@ bool validateSquares(unsigned int board[]) {
   //     cout << "intermediate values are  " << s << endl;
   //   }
   //     squares.at(r) = intermediate;
-  // }
-
-    for(int v = 0; v < NUM_ROWS * NUM_COLS; v++) {
-      vector<unsigned int> intermediate = squares.at(v%NUM_SQUARES);
-      unsigned int index = (v%9)*v;
-      intermediate.push_back(board[index]);
-      intermediate.push_back(board[index + 1]);
-      intermediate.push_back(board[index + 2]);
-      squares.at(v%NUM_SQUARES) = intermediate; 
-
-    }
-
-    // for(int c = 0; c < 3; c++){
+  // }'
+      // for(int c = 0; c < 3; c++){
     //   vector<unsigned int> intermediate = squares.at(i);
     //   for(int j = 0; j < 3; j++) {
     //     if(i%3 == 1) {
@@ -218,16 +232,49 @@ bool validateSquares(unsigned int board[]) {
 
   //}
 
-  cout << "Squares is of size " << squares.size() << endl;
+bool validateSquares(unsigned int board[]) {
+  bool is_valid;
 
-  for(auto s : squares){
-    cout << "in validateSubsection " << s.size() << endl;
+  vector<vector<unsigned int>> rows = extractRowThrees(board);
+  
 
-    if(!validateSubsection(s)){
-    return false;
-
+  for(auto r : rows) {
+    for(auto v : r) {
+      cout << "row value is " << v << endl;
     }
+    cout << "next row" << endl;
+
   }
+  // vector<vector<unsigned int>> squares = {};
+
+  // for(int i = 0; i < NUM_SQUARES; i++) { 
+  //   vector<unsigned int> subsection = {};
+  //   squares.push_back(subsection);
+  // }
+
+
+  //   for(int v = 0; v < NUM_ROWS * NUM_COLS; v++) {
+  //     vector<unsigned int> intermediate = squares.at(v%NUM_SQUARES);
+  //     unsigned int index = (v%9)*v;
+  //     intermediate.push_back(board[index]);
+  //     intermediate.push_back(board[index + 1]);
+  //     intermediate.push_back(board[index + 2]);
+  //     squares.at(v%NUM_SQUARES) = intermediate; 
+
+  //   }
+
+
+
+//  cout << "Squares is of size " << squares.size() << endl;
+
+  // for(auto s : squares){
+  //   cout << "in validateSubsection " << s.size() << endl;
+
+  //   if(!validateSubsection(s)){
+  //   return false;
+
+  //   }
+  // }
   return is_valid;
 
 }
