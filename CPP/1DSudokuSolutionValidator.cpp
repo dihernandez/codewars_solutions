@@ -111,7 +111,7 @@ bool validateCols(unsigned int board[]) {
   
 
 bool validateSquares(unsigned int board[]) {
-  bool is_valid;
+  bool is_valid = true;
 
   vector<vector<unsigned int>> rows = extractRowThrees(board);
   vector<vector<unsigned int>> squares = {};
@@ -200,20 +200,9 @@ bool validateSquares(unsigned int board[]) {
     for (auto v : s) {
    //   cout << "square value is " << v << endl;
     }
-   // cout << "square is of size " << s.size() << endl;
+
   }
   
-
-
-  for(auto f : fsquares) {
-    for(auto i: f) {
-      cout<<"in fsquares middle " << i << endl;
-
-    }
-    cout << "next fsquares " << f.size() << endl;
-
-  }
-
   for(auto s : fsquares){
     cout << "in validateSubsection " << s.size() << endl;
 
@@ -231,19 +220,17 @@ bool validateSquares(unsigned int board[]) {
 
 
 bool validSolution(unsigned int board[9][9]){
-  /* Write your solution here */
+
   unsigned int *pointer = &board[0][0];
 
-  //list<list<unsigned int>> cols;//extractCols(board);
-  //list<unsigned int> squares = extractSquares(pointer);
   bool is_valid = true;
 
-  // if(!validateRows(pointer)){ //!validateCols(pointer)) {
-  //   is_valid = false;
-  // }
-  // if(!validateCols(pointer)) {
-  //   is_valid = false;
-  // }
+  if(!validateRows(pointer)){
+    is_valid = false;
+  }
+  if(!validateCols(pointer)) {
+    is_valid = false;
+  }
   if(!validateSquares(pointer)) {
     is_valid = false;
 
