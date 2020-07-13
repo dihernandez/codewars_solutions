@@ -61,14 +61,10 @@ bool validateCols(unsigned int board[]) {
 
 
     for(int j = 0; j < NUM_COLS; j++) {
-       //if(i%j == 0) {
-         //subsection.push_back(board[j*9 + i]);
-      //}
+
       vector<unsigned int> intermediate = columns.at(i%9);
-      //cout << board[j*9 + i%9] << endl;
       intermediate.push_back(board[j*9 + i%9]);
       columns.at(i%9) = intermediate;
-      //colums.push_back(board[j*9]);
       if(board[i + j] == 0) {
         is_valid = false;
       }
@@ -76,9 +72,7 @@ bool validateCols(unsigned int board[]) {
 
   }
     for(auto c : columns){
-         cout << "in validateSubsection " << c.size() << endl;
         if(!validateSubsection(c)){
-          cout << "invalid " << endl;
           is_valid = false;
 
     }
@@ -120,64 +114,38 @@ bool validateSquares(unsigned int board[]) {
 
   for(int i = 0; i < NUM_SQUARES; i++) { 
     vector<unsigned int> subsection = {};
-    //squares.push_back(subsection);
     fsquares.push_back(subsection);
   }
 
   for(auto r : rows) {
     for(auto v : r) {
- //     cout << "row value is " << v << endl;
     }
-  //  cout << "next row" << endl;
 
   }
 
   for(int i = 0; i < rows.size(); i++){
     if(i%3 == 0){
       squares.push_back(rows.at(i));
-    //  cout <<" i here " << endl;
     } 
   }
 
   for(int i = 0; i < rows.size(); i++){
     if(i%3 == 1){
       squares.push_back(rows.at(i));
-   //   cout <<" i here " << endl;
     } 
   }
 
   for(int i = 0; i < rows.size(); i++){
     if(i%3 == 2){
       squares.push_back(rows.at(i));
-     // cout <<" i here " << endl;
     } 
   }
 
-  // for(int ns = 0; ns < NUM_SQUARES; ns++) {
-  //     vector<unsigned int> intermediate = {};
-
-  //     //for(int i = 0; i < ns/3 + 3; i++) {
-  //       for(auto s : squares[ns]){ 
-  //      //   cout << "putting this in intermediate " << s << endl;
-  //         intermediate.push_back(s);
-  //       }
-  //       for(auto s : squares[ns + 1]){
-  //         intermediate.push_back(s);
-  //       }
-  //      for(auto s : squares[ns + 2]){
-  //         intermediate.push_back(s);
-  //       }
-  //     //}
-  //     fsquares.push_back(intermediate);
-  // }
 
   for(unsigned int i = 0; i < NUM_SQUARES; i++) {
     unsigned int idx = i/3;
-    cout << "index is " << idx << endl;
     vector<unsigned int> intermediate = {};
-    cout << "squares at idx are size " << squares.size() << endl;
 
-    cout << "(i%3) * 3 is " << (i%3)*3 << endl;
     for(auto s : squares[i*3]) {
       intermediate.push_back(s);
     }
@@ -187,18 +155,13 @@ bool validateSquares(unsigned int board[]) {
     for(auto s : squares[i*3 + 2]) {
       intermediate.push_back(s);
     }
-    //intermediate.push_back(squares[(i%3)*3 + 1]);
-    //intermediate.push_back(squares[(i%3)*3 + 2]);
     fsquares[i] = intermediate;
 
 
   }
 
-
-  //cout << "squares is of size " << squares.size();
   for(auto s:squares) {
     for (auto v : s) {
-   //   cout << "square value is " << v << endl;
     }
 
   }
