@@ -1,3 +1,5 @@
+// Solution to the verify sudoku probelm
+
 #include <iostream>
 #include <list>
 #include <vector>
