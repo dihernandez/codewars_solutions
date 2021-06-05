@@ -18,11 +18,12 @@ def top_3_words(text):
     #words_list = re.split(ur"[^\P{P}']+", text)
     remove = punctuation
     remove = remove.replace("'", "")
-    remove += " "
-    r = re.compile(re.escape(remove))
+    #remove += " "
+    r = re.compile(r'[^\w\'\s]')
     #r = re.compile(remove)
-    #words_list = r.split(text)
     words_list = r.split(text)
+    #words_list = r.split(text)
+    #words_list = re.split(remove, text)
     words_list_split_by_space = []
     for word in words_list:
         words_list_split_by_space.extend(word.split())
@@ -57,4 +58,4 @@ def top_3_words(text):
         return [word[0] for word in sorted_words[0:3]]
 
 #TODO(diher) exlcude ' from punctuation' 
-print(top_3_words("fMKXQmXWrY./,!fMKXQmXWrY_CeBIKnRw?!/TyXINFt._,CeBIKnRw;.fMKXQmXWrY,;FnM?_ ;,TyXINFt-_fMKXQmXWrY;-;-CeBIKnRw?-cMbbyvQv-/-,dQYt:/;/;dQYt;dQYt,/!/fMKXQmXWrY_ FnM-;_-!cMbbyvQv_;dQYt;! ?TyXINFt?.-_TyXINFt,,cMbbyvQv,._CeBIKnRw_-;dQYt!,TyXINFt.??_dQYt,!?;;TyXINFt_?;;;TyXINFt,?fMKXQmXWrY/ /CeBIKnRw!.fMKXQmXWrY cMbbyvQv,.?TyXINFt?:.CeBIKnRw :.:/fMKXQmXWrY,. .TyXINFt-,,_cMbbyvQv,.CeBIKnRw;!;??TyXINFt.,:fMKXQmXWrY?_.fMKXQmXWrY__dQYt-,CeBIKnRw._??!dQYt/_?!TyXINFt;-TyXINFt;? !.fMKXQmXWrY/!?_.TyXINFt:_.TyXINFt ,._FnM_.!,fMKXQmXWrY/.CeBIKnRw;dQYt_-,!TyXINFt_?cMbbyvQv!,;--TyXINFt;?dQYt dQYt;TyXINFt/_?!:cMbbyvQv ??.;TyXINFt_fMKXQmXWrY?;-TyXINFt!;/ cMbbyvQv-/fMKXQmXWrY;:,/-TyXINFt! TyXINFt /!_TyXINFt; ,;CeBIKnRw:;TyXINFt-::?TyXINFt;/._.TyXINFt,cMbbyvQv/ ;TyXINFt-/CeBIKnRw TyXINFt, _;TyXINFt-!fMKXQmXWrY._?.-TyXINFt;-;dQYt-_/_cMbbyvQv:,_-TyXINFt?/dQYt_"))
+print(top_3_words("inaOlUIgwc,/.:!inaOlUIgwc-,inaOlUIgwc.inaOlUIgwc ,inaOlUIgwc-. :inaOlUIgwc-  inaOlUIgwc:;!inaOlUIgwc ,,,.inaOlUIgwc/!inaOlUIgwc-inaOlUIgwc,,_inaOlUIgwc  ,!;inaOlUIgwc-.inaOlUIgwc.!!:"))
