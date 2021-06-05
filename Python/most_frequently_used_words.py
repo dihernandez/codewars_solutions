@@ -16,10 +16,10 @@ def top_3_words(text):
     clean_text = []
     #r = re.compile(r'[^\P{P}\']+'.format("'" + re.escape(punctuation)))
     #words_list = re.split(ur"[^\P{P}']+", text)
-    remove = punctuation
-    remove = remove.replace("'", "")
+    # remove = punctuation
+    # remove = remove.replace("'", "")
     #remove += " "
-    r = re.compile(r'[^\w\'\s]')
+    r = re.compile(r'[^\w\'\_\s]|_')
     #r = re.compile(remove)
     words_list = r.split(text)
     #words_list = r.split(text)
@@ -46,7 +46,7 @@ def top_3_words(text):
             word_occurences[word] += 1
         else:
             word_occurences[word] = 1
-    #print(word_occurences)
+    print(word_occurences)
     sorted_words = sorted(word_occurences.items(), key= lambda item: item[1], reverse = True)
     print(sorted_words)
     if len(sorted_words) < 3:
@@ -58,4 +58,4 @@ def top_3_words(text):
         return [word[0] for word in sorted_words[0:3]]
 
 #TODO(diher) exlcude ' from punctuation' 
-print(top_3_words("inaOlUIgwc,/.:!inaOlUIgwc-,inaOlUIgwc.inaOlUIgwc ,inaOlUIgwc-. :inaOlUIgwc-  inaOlUIgwc:;!inaOlUIgwc ,,,.inaOlUIgwc/!inaOlUIgwc-inaOlUIgwc,,_inaOlUIgwc  ,!;inaOlUIgwc-.inaOlUIgwc.!!:"))
+print(top_3_words("KxxDzL!//uvzpqmZOyE-; -KxxDzL /KxxDzL/!,?KxxDzL_KxxDzL;_?KxxDzL:KxxDzL /:,/KxxDzL;KxxDzL , :.KxxDzL!-!,.KxxDzL/KxxDzL:,KxxDzL ?uvzpqmZOyE-!;:"))
