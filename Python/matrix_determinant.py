@@ -28,6 +28,7 @@ def select_minor(sel_x, sel_y, matrix):
         if len(m_row) > 0:
             minor.append(m_row)
     return minor
+
 def rank_three(matrix):
     a_minor = select_minor(0, 0, matrix)
     b_minor = select_minor(0, 1, matrix)
@@ -36,10 +37,30 @@ def rank_three(matrix):
     return a*rank_two(a_minor) - b*rank_two(b_minor) + c*rank_two(c_minor)
 
 def rank_n(matrix):
+    rank = len(matrix)
+    if rank <= 3:
+        return rank_three(matrix)
+    else:
+        a_minor = select_minor(0,0,matrix)
+        minors = []
+        for pos in range(rank):
+            minors.append(select_minor(0, pos, matrix))
+        det = 0
+        is_pos = True
+        for idx, minor in enumerate(minors):
+            if is_pos:
+                det += matrix[0][idx]*rank_n(minor)
+                is_pos = False
+            else:
+                det -= matrix[0][idx]*rank_n(minor)
+                is_pos = True
+        return det
         
 def determinant(matrix):
     rank = len(matrix)
-    if rank > 2:
+    if rank > 3:
+        return rank_n(matrix)
+    if rank == 3:
         return rank_three(matrix)
     elif rank == 2:
         return rank_two(matrix)
