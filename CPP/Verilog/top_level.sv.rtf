@@ -1,0 +1,55 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red210\green0\blue5;\red234\green234\blue234;\red0\green0\blue0;
+\red20\green0\blue196;\red252\green97\blue8;\red83\green85\blue2;}
+{\*\expandedcolortbl;;\cssrgb\c86667\c0\c0;\cssrgb\c93333\c93333\c93333;\cssrgb\c0\c0\c0;
+\cssrgb\c10980\c0\c81176;\cssrgb\c100000\c46667\c0;\cssrgb\c40000\c40000\c0;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 // prevents system from inferring an undeclared logic (good practice)\cf0 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \strokec5 `default_nettype none\cf0 \strokec4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf6 \strokec6 module\cf0 \strokec4  top_level(\
+        \cf6 \strokec6 input\cf0 \strokec4  \cf6 \strokec6 wire\cf0 \strokec4  [15:0]     sw,\
+        \cf6 \strokec6 input\cf0 \strokec4  \cf6 \strokec6 wire\cf0 \strokec4             btnl,\
+        \cf6 \strokec6 input\cf0 \strokec4  \cf6 \strokec6 wire\cf0 \strokec4             btnu,\
+        \cf6 \strokec6 input\cf0 \strokec4  \cf6 \strokec6 wire\cf0 \strokec4             btnr,\
+\
+        \cf6 \strokec6 output\cf0 \strokec4  \cf6 \strokec6 logic\cf0 \strokec4 [15:0]    led,\
+        \cf6 \strokec6 output\cf0 \strokec4  \cf6 \strokec6 logic\cf0 \strokec4           led17_r,\
+        \cf6 \strokec6 output\cf0 \strokec4  \cf6 \strokec6 logic\cf0 \strokec4           led16_b,\
+        \cf6 \strokec6 output\cf0 \strokec4  \cf6 \strokec6 logic\cf0 \strokec4  [7:0]    an,\
+        \cf6 \strokec6 output\cf0 \strokec4  \cf6 \strokec6 logic\cf0 \strokec4           ca,cb,cc,cd,ce,cf,cg);\
+\
+  \cf6 \strokec6 logic\cf0 \strokec4  [6:0] cat_segs;\
+\
+  \cf2 \strokec2 // instantiate a bto7s module called 'converter'\cf0 \strokec4 \
+  bto7s converter(\cf7 \strokec7 .x_in\cf0 \strokec4 (sw[3:0]), \cf7 \strokec7 .s_out\cf0 \strokec4 (cat_segs));\
+\
+  \cf2 \strokec2 // a typo...keep this here for moment\cf0 \strokec4 \
+  \cf6 \strokec6 assign\cf0 \strokec4  \{cg,cf,ce,cd,cc,cb,ca\} = ~cat_segss;\
+  \cf6 \strokec6 assign\cf0 \strokec4  an = 8'b0;\
+\
+  \cf2 \strokec2 /* we'll use the LEDs later...for now, just link them to the switches\
+   * and force some lights on\
+   */\cf0 \strokec4 \
+\
+  \cf6 \strokec6 assign\cf0 \strokec4  led = sw;\
+  \cf6 \strokec6 assign\cf0 \strokec4  led17_r = 1'b1;\
+  \cf6 \strokec6 assign\cf0 \strokec4  led16_b = 1'b1;\
+\
+\cf6 \strokec6 endmodule\cf0 \strokec4  \cf2 \strokec2 // top_level\cf0 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \strokec2 /* I usually add a comment to associate my endmodule line with the module name\
+ * this helps when if you have multiple module definitions in a file\
+ */\cf0 \strokec4 \
+\
+\cf2 \strokec2 // reset the default net type to wire, sometimes other code expects this.\cf0 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \strokec5 `default_nettype wire\cf0 \strokec4 \
+}

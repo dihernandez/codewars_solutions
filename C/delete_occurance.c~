@@ -1,0 +1,33 @@
+#include <stddef.h>
+
+struct NumCount {
+  int number;
+  int count;
+};
+
+
+
+int valueinarray(float val, float arr[])
+{
+    int i;
+    for(i = 0; i < sizeof(arr) / sizeof(arr[0]); i++)
+    {
+        if(arr[i] == val)
+            return 1;
+    }
+    return 0;
+}
+
+int* delete_nth(size_t szin, int order[szin], int max_e, size_t *szout) {
+  struct NumCount counted[szin];
+  int counted[szin]; // maximum of zsim distinct digits
+  for(int i = 0; i < szin; i++) {
+        if(counted[i].number == c) {
+            counted[i].count += 1;
+        } else {
+            counted[i].number = 1;
+            counted[i].count = 1;
+        }
+    } 
+    
+}

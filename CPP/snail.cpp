@@ -17,19 +17,21 @@ std::vector<int> snail(const std::vector<std::vector<int>> &snail_map) {
   }
 ;
 
+  const int l = snail_map.size();
+  const int d = snail_map.size(); 
   int length = snail_map.size(); // initial length and deapth
   int deapth = snail_map[0].size();
   int start_deapth = 0;
   int start_length = 0;
   int from_right = 0;
-  int from_left = 0;
+  int from_left = length - 1;
   int from_top = 0;
-  int from_bottom = 0;
+  int from_bottom = deapth - 1;
   
   int start = snail_map[0][0];
     
   int test = 0;
-  while(result.size() <= 4*length*deapth){
+  while(result.size() <= l*d && test<16) {
     test++;
     switch (dir) {
         case RIGHT:        
@@ -38,7 +40,7 @@ std::vector<int> snail(const std::vector<std::vector<int>> &snail_map) {
                 if(i== length) { 
                     cout << "changing direction " << endl;
                     dir = DOWN;
-                    length -= 1;
+                    length = 1;
                     from_top++;
                     break;
                 } else {
@@ -51,33 +53,45 @@ std::vector<int> snail(const std::vector<std::vector<int>> &snail_map) {
 
         case DOWN:
             cout <<" going down "<< endl;
-            for(int i = 1; i <= deapth; i++){
+            for(int i = 0; i <= deapth; i++){
                 if(i== deapth) {
-                    cout << "in i == deapth" << endl;
+                    cout << "changing direction " << endl;
+
                     dir = LEFT;
                     deapth -= 1;
-                    start_length++;
+                    from_left--;
                     break;
                 } else {
-                    cout << "pushing back " << " i is " << i << " " << snail_map[i][length] << "deapth is " << deapth << endl;
-                    result.push_back(snail_map[i][length]);
+            
+                    cout << "pushing back " << " i is " << i << " " << snail_map[i][from_left] << "from left is " << from_left << endl;
+                    if(i == 0) {
+                        // pass, corner 
+                    } else {
+                    result.push_back(snail_map[i][from_left]);
+                    }
                 }
             }
             break;
 
         case LEFT:
-            cout <<" going left "<< endl;
-                for(int i = length - 1; i >= 0; i--){
-                
-                cout << "pushing back " << " i is " << i << " " << snail_map[deapth][i] << " deapth " << deapth << endl;
-                result.push_back(snail_map[deapth][i]);
-            
+            cout << " going left "<< endl;
+            for(int i = length; i >= 0; i--){
                 if(i== 0) {
+
+                    cout << "changing direction " << endl;
                     dir = UP;
                     length -= 1;
-                    start_deapth++;
+                    from_bottom--;
                     break;
+                }                
+                cout << "pushing back " << " i is " << i << " " << snail_map[from_top][i] << " deapth " << deapth << endl;
+                if(i == length) {
+                    //pass, corner
+                } else {
+                result.push_back(snail_map[from_top][i]);
                 }
+            
+
             }
             break;
 
@@ -86,6 +100,9 @@ std::vector<int> snail(const std::vector<std::vector<int>> &snail_map) {
 
             for(int i = deapth; i >= 0; i--){
                 if(i== 0) {
+
+                    cout << "changing direction " << endl;
+
                     dir = RIGHT;
                     deapth -= 1;
                     from_right++;
@@ -93,12 +110,13 @@ std::vector<int> snail(const std::vector<std::vector<int>> &snail_map) {
                 }
 
                 cout << "pushing back " << " i is " << i << " snail map selection is " << snail_map[i][from_right] << " from_right " << from_right << endl;
-                result.push_back(snail_map[i - 1][from_right]);
+                result.push_back(snail_map[i][from_right]);
                 
 
             }
             break;
     }
+    //result.push_back(0);
   }
 
   return result;

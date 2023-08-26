@@ -48,9 +48,9 @@ void ScoreCard::addEntry(string entry) {
 string ScoreCard::getScore() {
   bool away_team_turn = true;
  
-  for(auto entry : bat_results){
-    cout<< "in getScore "<< "entry is " << entry << endl;
-    if(entry == "out") {
+  for(vector<string>::iterator entry_it = bat_results.begin(); entry_it !=  bat_results.end(); entry_it++) {
+    cout<< "in getScore "<< "entry is " << *entry_it << endl;
+    if(*entry_it == "out") {
         if(away_team_turn) {
             away_team_outs += 1;
         } else {
@@ -65,7 +65,7 @@ string ScoreCard::getScore() {
         away_team_turn = !away_team_turn;
         home_team_outs = 0;
     }
-    else if (entry == "single") {
+    else if (*entry_it == "single") {
       if(away_team_turn){
         away_team_bases.push_front(1);
         away_team_score += away_team_bases.back();
@@ -75,7 +75,7 @@ string ScoreCard::getScore() {
         home_team_score += away_team_bases.back();
         home_team_bases.pop_back();    
       }
-    } else if (entry == "double") {
+    } else if (*entry_it == "double") {
         if(away_team_turn) {
             away_team_bases.push_front(1);
             away_team_bases.push_front(1);
@@ -92,7 +92,7 @@ string ScoreCard::getScore() {
             home_team_bases.pop_back();
         }
     }
-    else if (entry == "triple") {
+    else if (*entry_it == "triple") {
             if(away_team_turn) {
                 away_team_bases.push_front(1);
                 away_team_bases.push_front(1);
@@ -117,7 +117,7 @@ string ScoreCard::getScore() {
             }
         }
 
-    else if(entry == "homerun") {
+    else if(*entry_it == "homerun") {
       int homerun_score = 1;
       for(list<int>::iterator it = away_team_bases.begin(); it != away_team_bases.end(); it++){
         homerun_score += *it;
@@ -130,6 +130,7 @@ string ScoreCard::getScore() {
       }
     }  
   }
+  bat_results = {};
   string result = "Home: " + to_string(home_team_score) + " Away: " + to_string(away_team_score);
   return  result;
 }
